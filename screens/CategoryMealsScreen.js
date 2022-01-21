@@ -7,6 +7,13 @@ const CategoryMealsScreen = (props) => {
             <Text>Category Meals Screen</Text>
             <Button title='Go to Meal Details' onPress={()=>{
                 props.navigation.navigate({routeName: 'MealDetails'});
+                //push needs to navigate to the same screen, when we need 
+                //to load different content to the same screen
+                // props.navigation.push('MealDetails');
+            }} />
+            <Button title='Go Back' onPress={()=>{
+                // props.navigation.goBack();
+                props.navigation.pop();
             }} />
         </View>
     );
