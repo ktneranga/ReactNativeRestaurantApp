@@ -13,7 +13,8 @@ const CategoriesScreen = (props) => {
                 onPress={ ()=>{props.navigation.navigate({
                     routeName: 'CategoryMeals',
                     params: {
-                        categoryId: itemData.item.id
+                        categoryId: itemData.item.id,
+                        categoryTitle: itemData.item.title
                     }
                 });
             }}
