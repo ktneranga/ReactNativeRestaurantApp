@@ -33,10 +33,10 @@ CategoryMealsScreen.navigationOptions = (navigationData) => {
 
     return{
         headerTitle: selectedCategory.title,
-        headerStyle: {
-            backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
-        },
-        headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor 
+        // headerStyle: {
+        //     backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
+        // },
+        // headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor 
     };
 }
 
