@@ -34,6 +34,7 @@ const MealsNavigator = createStackNavigator({
     }
 },{
     defaultNavigationOptions: {
+            // headerTitle: 'Teran',
             headerStyle: {
                 backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
             },
