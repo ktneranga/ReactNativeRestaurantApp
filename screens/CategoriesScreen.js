@@ -3,26 +3,26 @@ import {Text, View, StyleSheet, Button, FlatList, TouchableOpacity, Platform} fr
 
 import { CATEGORIES } from '../data/dummy-data';
 import Color from '../constants/Color';
+import CategoryGridTile from '../components/CategoryGridTile';
 
 //java script functions are the objects
 const CategoriesScreen = (props) => {
     const renderGridItem = (itemData) => {
         return (
-            <TouchableOpacity 
-                style={styles.gridItem} 
-                onPress={ ()=>{props.navigation.navigate({
+            <CategoryGridTile
+            title={itemData.item.title}
+            color={itemData.item.color}
+            onPress={
+                ()=>{props.navigation.navigate({
                     routeName: 'CategoryMeals',
                     params: {
                         categoryId: itemData.item.id,
                         categoryTitle: itemData.item.title
                     }
                 });
-            }}
-            >
-                <View>
-                    <Text>{itemData.item.title}</Text>
-                </View>
-            </TouchableOpacity>
+                }
+            }
+            />
         );
     }
     
@@ -49,12 +49,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    gridItem: {
-        flex: 1,
-        margin: 15,
-        height: 150,
-        backgroundColor: 'yellow'
     }
 });
 

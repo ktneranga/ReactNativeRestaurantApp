@@ -17,11 +17,13 @@ export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
 
   if(!fontLoaded){
-    <AppLoading
-      startAsync={fetchFonts}
-      onFinish={()=>setFontLoaded(true)}
-      onError={(err)=>console.log(err)}
-    />
+    return(
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={()=>setFontLoaded(true)}
+        onError={(err)=>console.log(err)}
+      />
+    );
   }
 
   return (
