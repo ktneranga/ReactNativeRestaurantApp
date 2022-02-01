@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet, Button, Platform, FlatList} from 'react-native';
 import { CATEGORIES,MEALS} from '../data/dummy-data';
 import Color from '../constants/Color';
+import MealItem from '../components/MealItem';
 
 const CategoryMealsScreen = (props) => {
     const catId = props.navigation.getParam('categoryId');
@@ -12,9 +13,14 @@ const CategoryMealsScreen = (props) => {
 
     const renderItem = (itemData) => { //itemData object passed by the flatlist
         return(
-            <View>
-                <Text>{itemData.item.title}</Text>
-            </View>
+            <MealItem
+                title={itemData.item.title}
+                onSelectMeal={()=>{}}
+                duration={itemData.item.duration}
+                complexity={itemData.item.complexity}
+                affordability={itemData.item.affordability}
+                image={itemData.item.imageUrl}
+            />
         );
     }
 
@@ -24,6 +30,7 @@ const CategoryMealsScreen = (props) => {
                 data={displayedMeals}
                 renderItem={renderItem}
                 keyExtractor={(item,index) => item.id}
+                style={{ width: '100%' }}
             />
         </View>
     );
@@ -36,10 +43,10 @@ CategoryMealsScreen.navigationOptions = (navigationData) => {
 
     return{
         headerTitle: selectedCategory.title,
-        // headerStyle: {
-        //     backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
-        // },
-        // headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor 
+        headerStyle: {
+            backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
+        },
+        headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor 
     };
 }
 
@@ -47,7 +54,8 @@ const styles = StyleSheet.create({
     screen : {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 20
     }
 });
 
