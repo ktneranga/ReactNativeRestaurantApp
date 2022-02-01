@@ -6,16 +6,20 @@ import MealItem from '../components/MealItem';
 
 const CategoryMealsScreen = (props) => {
     const catId = props.navigation.getParam('categoryId');
-
     // const selectedCategory = CATEGORIES.find((cat)=>cat.id === catId);
 
     const displayedMeals = MEALS.filter(meal => meal.categoryIds.indexOf(catId)>=0); //if true this meal has catId
 
-    const renderItem = (itemData) => { //itemData object passed by the flatlist
+    const renderItem = (itemData) => { // itemData object passed by the flatlist
         return(
             <MealItem
                 title={itemData.item.title}
-                onSelectMeal={()=>{}}
+                onSelectMeal={()=>{props.navigation.navigate({
+                    routeName: 'MealDetails',
+                    params : {
+                        mealId: itemData.item.id
+                    }
+                })}}
                 duration={itemData.item.duration}
                 complexity={itemData.item.complexity}
                 affordability={itemData.item.affordability}
