@@ -6,7 +6,8 @@ import { HeaderButtons, Item} from 'react-navigation-header-buttons';
 
 const MealDetailsScreen = (props) => {
 
-    const mealId = props.navigation.getParam('mealId');
+    // const mealId = props.navigation.getParam('mealId');
+    const mealId = props.route.params.mealId;
     const mealDetails = MEALS.find(item=>item.id == mealId);
 
     return(

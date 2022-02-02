@@ -5,7 +5,8 @@ import Color from '../constants/Color';
 import MealItem from '../components/MealItem';
 
 const CategoryMealsScreen = (props) => {
-    const catId = props.navigation.getParam('categoryId');
+    // const catId = props.navigation.getParam('categoryId');
+    const catId = props.route.params.categoryId;
     // const selectedCategory = CATEGORIES.find((cat)=>cat.id === catId);
 
     const displayedMeals = MEALS.filter(meal => meal.categoryIds.indexOf(catId)>=0); //if true this meal has catId
@@ -14,11 +15,14 @@ const CategoryMealsScreen = (props) => {
         return(
             <MealItem
                 title={itemData.item.title}
-                onSelectMeal={()=>{props.navigation.navigate({
-                    routeName: 'MealDetails',
-                    params : {
-                        mealId: itemData.item.id
-                    }
+                // onSelectMeal={()=>{props.navigation.navigate({
+                //     routeName: 'MealDetails',
+                //     params : {
+                //         mealId: itemData.item.id
+                //     }
+                // })}}
+                onSelectMeal={()=>{props.navigation.navigate('MealDetails', {
+                    mealId: itemData.item.id
                 })}}
                 duration={itemData.item.duration}
                 complexity={itemData.item.complexity}
