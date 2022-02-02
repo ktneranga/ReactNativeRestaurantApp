@@ -5,10 +5,12 @@
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import CategoryScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailsScreen from '../screens/MealDetailsScreen';
+import FavoritesScreen from '../screens/FavoritesScreen';
 
 import { Platform } from 'react-native';
 import Color from '../constants/Color';
@@ -17,45 +19,61 @@ const Stack = createStackNavigator();
 
 const MealsNavigator = () => {
     return(
+        <Stack.Navigator>
+            <Stack.Screen
+                name='Categories'
+                component={CategoryScreen}
+                options={{ 
+                    headerStyle :{
+                        backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
+                    },
+                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor
+                    }}
+            />
+            <Stack.Screen
+                name='CategoryMeals'
+                component={CategoryMealsScreen}
+                options={{ 
+                    headerStyle: {
+                        backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
+                    },
+                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor
+                    }}
+            />
+            <Stack.Screen
+                name='MealDetails'
+                component={MealDetailsScreen}
+                options={{ 
+                    headerStyle: {
+                        backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
+                    },
+                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor
+                    }}
+            />
+        </Stack.Navigator>
+    );
+}
+
+const Tab = createBottomTabNavigator();
+
+const MealsFavTabNavigator = () => {
+    return(
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name='Categories'
-                    component={CategoryScreen}
-                    options={{ 
-                        headerStyle :{
-                            backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
-                        },
-                        headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor
-                     }}
+            <Tab.Navigator>
+                <Tab.Screen
+                    name='Meals'
+                    component={MealsNavigator}
                 />
-                <Stack.Screen
-                    name='CategoryMeals'
-                    component={CategoryMealsScreen}
-                    options={{ 
-                       headerStyle: {
-                           backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
-                       },
-                       headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor
-                     }}
+                <Tab.Screen
+                    name='Favorites'
+                    component={FavoritesScreen}
                 />
-                <Stack.Screen
-                    name='MealDetails'
-                    component={MealDetailsScreen}
-                    options={{ 
-                        headerStyle: {
-                            backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
-                        },
-                        headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor
-                     }}
-                />
-            </Stack.Navigator>
+            </Tab.Navigator>
         </NavigationContainer>
     );
 }
 
-export default MealsNavigator;
-
+export default MealsFavTabNavigator;
 
 
 
