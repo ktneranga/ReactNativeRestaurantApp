@@ -12,16 +12,20 @@ const CategoriesScreen = (props) => {
             <CategoryGridTile
             title={itemData.item.title}
             color={itemData.item.color}
-            onPress={
-                ()=>{props.navigation.navigate({
-                    routeName: 'CategoryMeals',
-                    params: {
-                        categoryId: itemData.item.id,
-                        categoryTitle: itemData.item.title
-                    }
-                });
-                }
-            }
+            // onPress={
+            //     ()=>{props.navigation.navigate({
+            //         routeName: 'CategoryMeals',
+            //         params: {
+            //             categoryId: itemData.item.id,
+            //             categoryTitle: itemData.item.title
+            //         }
+            //     });
+            //     }
+            // }
+            onPress={()=>{props.navigation.navigate('CategoryMeals', {
+                categoryId: itemData.item.id,
+                categoryTitle: itemData.item.title
+            })}}
             />
         );
     }
