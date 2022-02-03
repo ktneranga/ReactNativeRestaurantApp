@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {Button} from 'react-native'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
+import { Ionicons } from '@expo/vector-icons';
 
 import CategoryScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
@@ -71,14 +72,27 @@ const Tab = createBottomTabNavigator();
 const MealsFavTabNavigator = () => {
     return(
         <NavigationContainer>
-            <Tab.Navigator>
+            <Tab.Navigator
+            tabBarOptions={{ 
+                activeTintColor: Color.accentColor,
+                activeBackgroundColor: Color.primaryColor
+             }}
+            >
                 <Tab.Screen
                     name='Meals'
                     component={MealsNavigator}
+                    options={{ 
+                        tabBarLabel: 'Meals',
+                        tabBarIcon:({color})=> <Ionicons name='ios-restaurant' size={25} color={color} />
+                     }}
                 />
                 <Tab.Screen
                     name='Favorites'
                     component={FavoritesScreen}
+                    options={{ 
+                        tabBarLabel: 'Favorites!',
+                        tabBarIcon: ({color})=> <Ionicons name='ios-star' size={25} color={color}/>
+                     }}
                 />
             </Tab.Navigator>
         </NavigationContainer>
