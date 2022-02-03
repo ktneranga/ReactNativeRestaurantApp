@@ -6,11 +6,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Button} from 'react-native'
+import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 
 import CategoryScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailsScreen from '../screens/MealDetailsScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import HeaderButton from '../components/HeaderButton';
 
 import { Platform } from 'react-native';
 import Color from '../constants/Color';
@@ -47,7 +50,16 @@ const MealsNavigator = () => {
                     headerStyle: {
                         backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
                     },
-                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor
+                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor,
+                    headerRight: () => (
+                        <HeaderButtons
+                            HeaderButtonComponent={HeaderButton}
+                        >
+                            <Item title='Favorite' iconName='ios-star' onPress={()=>{
+                                console.log('Mark as favorite');
+                            }}/>
+                        </HeaderButtons>
+                      ),
                     }}
             />
         </Stack.Navigator>
