@@ -9,19 +9,22 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import { Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import CategoryScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailsScreen from '../screens/MealDetailsScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import HeaderButton from '../components/HeaderButton';
+import FilterScreen from '../screens/FilterScreen';
 
 import { Platform } from 'react-native';
 import Color from '../constants/Color';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
-const MealsNavigator = () => {
+const MealsNavigator = (props) => {
     return(
         <Stack.Navigator>
             <Stack.Screen
@@ -31,7 +34,18 @@ const MealsNavigator = () => {
                     headerStyle :{
                         backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
                     },
-                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor
+                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor,
+                    headerLeft: ()=>(
+                        <HeaderButtons
+                            HeaderButtonComponent={HeaderButton}
+                        >
+                            <Item
+                                title='Menu'
+                                iconName='ios-menu'
+                                onPress={()=>{props.navigation.toggleDrawer()}}
+                            />
+                        </HeaderButtons>
+                    )
                     }}
             />
             <Stack.Screen
@@ -67,7 +81,7 @@ const MealsNavigator = () => {
     );
 }
 
-const FavoriteScreenNavigator = () => {
+const FavoriteScreenNavigator = (props) => {
     return(
         <Stack.Navigator>
             <Stack.Screen
@@ -78,7 +92,18 @@ const FavoriteScreenNavigator = () => {
                     headerStyle: {
                         backgroundColor: Platform.OS === 'android' ? Color.primaryColor : 'white'
                     },
-                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.primaryColor
+                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.primaryColor,
+                    headerLeft: ()=>(
+                        <HeaderButtons
+                            HeaderButtonComponent={HeaderButton}
+                        >
+                            <Item
+                                title='Menu'
+                                iconName='ios-menu'
+                                onPress={()=>{props.navigation.toggleDrawer()}}
+                            />
+                        </HeaderButtons>
+                    )
                  }}
             />
         </Stack.Navigator>
@@ -92,7 +117,6 @@ const MealsFavTabNavigator = () => {
 
     if(Platform.OS === 'android'){
         return(
-            <NavigationContainer>
                 <Tab.Navigator
                     activeTintColor={Color.accentColor}
                     // barStyle={{ 
@@ -121,13 +145,11 @@ const MealsFavTabNavigator = () => {
                             shifting: true
                         }}
                     />
-                </Tab.Navigator>
-            </NavigationContainer>
+                </Tab.Navigator> 
         ) ;
     }
 
     return(
-    <NavigationContainer>
         <Tab.Navigator
         tabBarOptions={{ 
             activeTintColor: Color.accentColor
@@ -150,11 +172,56 @@ const MealsFavTabNavigator = () => {
                  }}
             />
         </Tab.Navigator>
-    </NavigationContainer>
     );
 }
 
-export default MealsFavTabNavigator;
+const FiltersNavigator = (props) => {
+    return(
+        <Stack.Navigator>
+            <Stack.Screen
+                name='Filters'
+                component={FilterScreen}
+                options={{ 
+                    title: 'Filter Meals',
+                    headerStyle: {
+                        backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
+                    },
+                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor,
+                    headerLeft: ()=>(
+                        <HeaderButtons
+                            HeaderButtonComponent={HeaderButton}
+                        >
+                            <Item
+                                title='Menu'
+                                iconName='ios-menu'
+                                onPress={()=>{props.navigation.toggleDrawer()}}
+                            />
+                        </HeaderButtons>
+                    )
+                 }}
+            />
+        </Stack.Navigator>
+    );
+}
+
+const mainNavigator = () => {
+    return(
+        <NavigationContainer>
+            <Drawer.Navigator>
+                <Drawer.Screen
+                    name='MealsFavs'
+                    component={MealsFavTabNavigator}
+                />
+                <Drawer.Screen
+                    name='Filters'
+                    component={FiltersNavigator}
+                />
+            </Drawer.Navigator>
+        </NavigationContainer>
+    );
+}
+
+export default mainNavigator;
 
 
 
