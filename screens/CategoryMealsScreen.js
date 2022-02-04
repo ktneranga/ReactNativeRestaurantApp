@@ -45,19 +45,19 @@ const CategoryMealsScreen = (props) => {
     );
 }
 
-CategoryMealsScreen.navigationOptions = (navigationData) => {
-    const catId = navigationData.navigation.getParam('categoryId');
+// CategoryMealsScreen.navigationOptions = (navigationData) => {
+//     const catId = navigationData.navigation.getParam('categoryId');
 
-    const selectedCategory = CATEGORIES.find((cat)=>cat.id === catId);
+//     const selectedCategory = CATEGORIES.find((cat)=>cat.id === catId);
 
-    return{
-        headerTitle: selectedCategory.title,
-        headerStyle: {
-            backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
-        },
-        headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor 
-    };
-}
+//     return{
+//         headerTitle: selectedCategory.title,
+//         headerStyle: {
+//             backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
+//         },
+//         headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor 
+//     };
+// }
 
 const styles = StyleSheet.create({
     screen : {
