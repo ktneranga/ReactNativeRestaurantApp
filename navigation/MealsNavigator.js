@@ -6,9 +6,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {Button} from 'react-native'
-import {HeaderButtons, Item} from 'react-navigation-header-buttons'
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import { Ionicons } from '@expo/vector-icons';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import CategoryScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
@@ -57,7 +57,7 @@ const MealsNavigator = () => {
                             HeaderButtonComponent={HeaderButton}
                         >
                             <Item title='Favorite' iconName='ios-star' onPress={()=>{
-                                console.log('Mark as favorite');
+                                console.log('Mark as favorite'); 
                             }}/>
                         </HeaderButtons>
                       ),
@@ -67,35 +67,90 @@ const MealsNavigator = () => {
     );
 }
 
-const Tab = createBottomTabNavigator();
+const FavoriteScreenNavigator = () => {
+    return(
+        <Stack.Navigator>
+            <Stack.Screen
+                name='Favorites'
+                component={FavoritesScreen}
+                options={{ 
+                    title: 'Your Favorites',
+                    headerStyle: {
+                        backgroundColor: Platform.OS === 'android' ? Color.primaryColor : 'white'
+                    },
+                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.primaryColor
+                 }}
+            />
+        </Stack.Navigator>
+    );
+}
+
+
+const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
 
 const MealsFavTabNavigator = () => {
+
+    if(Platform.OS === 'android'){
+        return(
+            <NavigationContainer>
+                <Tab.Navigator
+                    activeTintColor={Color.accentColor}
+                    // barStyle={{ 
+                    //     // backgroundColor: Color.primaryColor,
+                    // }}
+                    shifting={true}
+                >
+                    <Tab.Screen
+                        name='Meals'
+                        component={MealsNavigator}
+                        options={{ 
+                            tabBarLabel: 'Meals',
+                            tabBarIcon:({color})=> <Ionicons name='ios-restaurant' size={25} color={color}
+                            />,
+                            tabBarColor : Color.primaryColor,
+                            shifting: true
+                        }}
+                    />
+                    <Tab.Screen
+                        name='Favorites'
+                        component={FavoriteScreenNavigator}
+                        options={{ 
+                            tabBarLabel: 'Favorites!',
+                            tabBarIcon: ({color})=> <Ionicons name='ios-star' size={25} color={color}/>,
+                            tabBarColor : Color.accentColor,
+                            shifting: true
+                        }}
+                    />
+                </Tab.Navigator>
+            </NavigationContainer>
+        ) ;
+    }
+
     return(
-        <NavigationContainer>
-            <Tab.Navigator
-            tabBarOptions={{ 
-                activeTintColor: Color.accentColor,
-                activeBackgroundColor: Color.primaryColor
-             }}
-            >
-                <Tab.Screen
-                    name='Meals'
-                    component={MealsNavigator}
-                    options={{ 
-                        tabBarLabel: 'Meals',
-                        tabBarIcon:({color})=> <Ionicons name='ios-restaurant' size={25} color={color} />
-                     }}
-                />
-                <Tab.Screen
-                    name='Favorites'
-                    component={FavoritesScreen}
-                    options={{ 
-                        tabBarLabel: 'Favorites!',
-                        tabBarIcon: ({color})=> <Ionicons name='ios-star' size={25} color={color}/>
-                     }}
-                />
-            </Tab.Navigator>
-        </NavigationContainer>
+    <NavigationContainer>
+        <Tab.Navigator
+        tabBarOptions={{ 
+            activeTintColor: Color.accentColor
+         }}
+        >
+            <Tab.Screen
+                name='Meals'
+                component={MealsNavigator}
+                options={{ 
+                    tabBarLabel: 'Meals',
+                    tabBarIcon:({color})=> <Ionicons name='ios-restaurant' size={25} color={color} />
+                 }}
+            />
+            <Tab.Screen
+                name='Favorites'
+                component={FavoriteScreenNavigator}
+                options={{ 
+                    tabBarLabel: 'Favorites!',
+                    tabBarIcon: ({color})=> <Ionicons name='ios-star' size={25} color={color}/>
+                 }}
+            />
+        </Tab.Navigator>
+    </NavigationContainer>
     );
 }
 

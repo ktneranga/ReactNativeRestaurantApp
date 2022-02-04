@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import Color from '../constants/Color';
 
 const FavoritesScreen = (props) => {
     return(

@@ -11,26 +11,26 @@ const CategoryMealsScreen = (props) => {
 
     const displayedMeals = MEALS.filter(meal => meal.categoryIds.indexOf(catId)>=0); //if true this meal has catId
 
-    const renderItem = (itemData) => { // itemData object passed by the flatlist
-        return(
-            <MealItem
-                title={itemData.item.title}
-                // onSelectMeal={()=>{props.navigation.navigate({
-                //     routeName: 'MealDetails',
-                //     params : {
-                //         mealId: itemData.item.id
-                //     }
-                // })}}
-                onSelectMeal={()=>{props.navigation.navigate('MealDetails', {
-                    mealId: itemData.item.id
-                })}}
-                duration={itemData.item.duration}
-                complexity={itemData.item.complexity}
-                affordability={itemData.item.affordability}
-                image={itemData.item.imageUrl}
-            />
-        );
-    }
+    // const renderItem = (itemData) => { // itemData object passed by the flatlist
+    //     return(
+    //         <MealItem
+    //             title={itemData.item.title}
+    //             // onSelectMeal={()=>{props.navigation.navigate({
+    //             //     routeName: 'MealDetails',
+    //             //     params : {
+    //             //         mealId: itemData.item.id
+    //             //     }
+    //             // })}}
+    //             onSelectMeal={()=>{props.navigation.navigate('MealDetails', {
+    //                 mealId: itemData.item.id
+    //             })}}
+    //             duration={itemData.item.duration}
+    //             complexity={itemData.item.complexity}
+    //             affordability={itemData.item.affordability}
+    //             image={itemData.item.imageUrl}
+    //         />
+    //     );
+    // }
 
     return(
         <View style={styles.screen}>
