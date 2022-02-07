@@ -12,7 +12,7 @@ const CategoryGridTile = (props) => {
     return (
         <View style={styles.gridItem}>
             <TouchableCmp 
-                style={styles.gridItem} 
+
                 onPress={props.onPress}
             >
                 <View style={ {...styles.container, ...{backgroundColor: props.color}} }>
@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 15,
         height: 150,
-        borderRadius: 10
+        borderRadius: 10,
+        overflow: 'hidden'
     },
     container: {
         flex: 1,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Text, View, StyleSheet, Button, Platform, FlatList} from 'react-native';
 import { CATEGORIES,MEALS} from '../data/dummy-data';
 import Color from '../constants/Color';
@@ -10,6 +10,13 @@ const CategoryMealsScreen = (props) => {
     // const selectedCategory = CATEGORIES.find((cat)=>cat.id === catId);
 
     const displayedMeals = MEALS.filter(meal => meal.categoryIds.indexOf(catId)>=0); //if true this meal has catId
+
+
+    useEffect(()=>{
+       props.navigation.setOptions({
+           title: props.route.params.categoryTitle
+       });
+    });
 
     // const renderItem = (itemData) => { // itemData object passed by the flatlist
     //     return(

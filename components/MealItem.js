@@ -11,8 +11,6 @@ import {
 
 const MealItem = (props) => {
 
-  console.log(props.title);
-
   let TouchableCmp = TouchableOpacity;
 
   if(Platform.OS == 'android' && Platform.Version >=21){
