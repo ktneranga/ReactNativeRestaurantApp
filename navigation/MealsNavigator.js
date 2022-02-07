@@ -6,7 +6,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -51,17 +51,19 @@ const MealsNavigator = (props) => {
             <Stack.Screen
                 name='CategoryMeals'
                 component={CategoryMealsScreen}
-                options={{ 
+                options={
+                    { 
                     headerStyle: {
                         backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
                     },
-                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor
-                    }}
+                    headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor,
+                    }}   
             />
             <Stack.Screen
                 name='MealDetails'
                 component={MealDetailsScreen}
-                options={{ 
+                options={
+                    { 
                     headerStyle: {
                         backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
                     },
@@ -119,9 +121,6 @@ const MealsFavTabNavigator = () => {
         return(
                 <Tab.Navigator
                     activeTintColor={Color.accentColor}
-                    // barStyle={{ 
-                    //     // backgroundColor: Color.primaryColor,
-                    // }}
                     shifting={true}
                 >
                     <Tab.Screen

@@ -1,6 +1,8 @@
-import React from 'react';
-import {Text, View, StyleSheet, Button} from 'react-native';
+import React,{useEffect} from 'react';
+import {Text, View, StyleSheet, Button, ScrollView, Image, StatusBar} from 'react-native';
 import {MEALS} from '../data/dummy-data';
+import DefaultText from '../components/DefaultText';
+import ListItem from '../components/ListItem';
 
 const MealDetailsScreen = (props) => {
 
@@ -8,32 +10,74 @@ const MealDetailsScreen = (props) => {
     const mealId = props.route.params.mealId;
     const mealDetails = MEALS.find(item=>item.id == mealId);
 
+    useEffect(()=>{
+        props.navigation.setOptions({
+            title: mealDetails.title
+        });
+    });
+
     return(
-        <View style={styles.screen}>
-            <Text>{mealDetails.title}</Text>
-            <Button title='Back' onPress={()=>{
-                //props.navigation.pop(); ->alternative to goback
-                //props.navigation.replace('screenname'); new page, cannot go back
-                props.navigation.popToTop(); //go to root screen
-            }}/>
-        </View>
+        <ScrollView style={styles.container}>
+            <Image
+                style={styles.image}
+                source={{ uri: mealDetails.imageUrl }}
+            />
+            <View style={styles.details}>
+                <DefaultText>{mealDetails.duration}m</DefaultText>
+                <DefaultText>{mealDetails.complexity.toUpperCase()}</DefaultText>
+                <DefaultText>{mealDetails.affordability.toUpperCase()}</DefaultText>
+            </View>
+            <Text style={styles.title}>Ingredients</Text>
+                {
+                    mealDetails.ingredients.map((ingredient)=>(
+                        <ListItem key={ingredient} item={ingredient}/>
+                    ))
+                }
+            <Text style={styles.title}>Steps</Text>
+            {
+                mealDetails.steps.map(step=>(
+                    <ListItem key={step} item={step}/>
+                ))
+            }
+        </ScrollView>
     );
 };
 
-MealDetailsScreen.navigationOptions = navigationData => {
-    const mealId = navigationData.navigation.getParam('mealId');
-    const mealDetails = MEALS.find(item=>item.id == mealId);
-    return{
-        headerTitle: mealDetails.title,
-        headerRight: ()=>(<Text>Fav</Text>)
-    };
-}
+// MealDetailsScreen.navigationOptions = navigationData => {
+//     const mealId = navigationData.navigation.getParam('mealId');
+//     const mealDetails = MEALS.find(item=>item.id == mealId);
+//     return{
+//         headerTitle: mealDetails.title,
+//         headerRight: ()=>(<Text>Fav</Text>)
+//     };
+// }
 
 const styles = StyleSheet.create({
+    container:{
+        flex: 1
+    },
     screen : {
-        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 20
+    },
+    details:{
+        flexDirection: 'row',
+        padding: 15,
+        justifyContent: 'space-around'
+    },
+    text: {
+        fontSize: 42,
+      },
+    image:{
+        width: '100%',
+        height: 200
+    },
+    title: {
+        textAlign: 'center',
+        fontSize: 20,
+        fontFamily: 'open-sans-bold',
+        paddingVertical: 20
     }
 });
 
