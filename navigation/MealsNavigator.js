@@ -196,6 +196,14 @@ const FiltersNavigator = (props) => {
                                 onPress={()=>{props.navigation.toggleDrawer()}}
                             />
                         </HeaderButtons>
+                    ),
+                    headerRight: ()=>(
+                        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                            <Item
+                                title='Save'
+                                iconName='ios-save'
+                            />
+                        </HeaderButtons>
                     )
                  }}
             />
