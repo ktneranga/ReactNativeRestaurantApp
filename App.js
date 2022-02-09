@@ -2,9 +2,21 @@ import React, {useState} from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux' ;
 
 // import MealsNavigator from './navigation/MealsNavigator';
 import MealsFavTabNavigator from './navigation/MealsNavigator';
+import mealsReducer from './store/reducers/meals';
+
+const rootReducer = combineReducers({
+  meals: mealsReducer
+});
+
+//central store
+const store = createStore(rootReducer);
+
+//now this store need to be provided to our app => react redux
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -28,7 +40,9 @@ export default function App() {
   }
 
   return (
-    <MealsFavTabNavigator/>
+    <Provider store={store}>
+      <MealsFavTabNavigator/>
+    </Provider>
   );
 }
 
