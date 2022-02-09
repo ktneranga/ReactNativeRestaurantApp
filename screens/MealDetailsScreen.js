@@ -3,11 +3,17 @@ import {Text, View, StyleSheet, Button, ScrollView, Image, StatusBar} from 'reac
 import {MEALS} from '../data/dummy-data';
 import DefaultText from '../components/DefaultText';
 import ListItem from '../components/ListItem';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import HeaderButton from '../components/HeaderButton';
+import { toggleFavorite } from '../store/actions/meals';
+
 
 const MealDetailsScreen = (props) => {
 
     const availableMeals = useSelector(state=>state.meals.meals);
+
+    const dispatch = useDispatch();
 
     // const mealId = props.navigation.getParam('mealId');
     const mealId = props.route.params.mealId;
@@ -18,6 +24,20 @@ const MealDetailsScreen = (props) => {
             title: mealDetails.title
         });
     });
+
+    React.useLayoutEffect(()=>{
+        props.navigation.setOptions({
+            headerRight: () => (
+                <HeaderButtons
+                    HeaderButtonComponent={HeaderButton}
+                >
+                    <Item title='Favorite' iconName='ios-star' onPress={()=>{
+                        dispatch(toggleFavorite(mealId));
+                    }}/>
+                </HeaderButtons>
+              ),
+        })
+    }, [props.navigation]);
 
     return(
         <ScrollView style={styles.container}>
