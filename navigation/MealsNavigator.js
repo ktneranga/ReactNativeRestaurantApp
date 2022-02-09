@@ -68,15 +68,15 @@ const MealsNavigator = (props) => {
                         backgroundColor: Platform.OS === 'android' ? Color.primaryColor : ''
                     },
                     headerTintColor: Platform.OS === 'android' ? 'white' : Color.accentColor,
-                    headerRight: () => (
-                        <HeaderButtons
-                            HeaderButtonComponent={HeaderButton}
-                        >
-                            <Item title='Favorite' iconName='ios-star' onPress={()=>{
-                                console.log('Mark as favorite'); 
-                            }}/>
-                        </HeaderButtons>
-                      ),
+                    // headerRight: () => (
+                    //     <HeaderButtons
+                    //         HeaderButtonComponent={HeaderButton}
+                    //     >
+                    //         <Item title='Favorite' iconName='ios-star' onPress={()=>{
+                    //             console.log('Mark as favorite'); 
+                    //         }}/>
+                    //     </HeaderButtons>
+                    //   ),
                     }}
             />
         </Stack.Navigator>
