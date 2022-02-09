@@ -3,12 +3,15 @@ import {Text, View, StyleSheet, Button, ScrollView, Image, StatusBar} from 'reac
 import {MEALS} from '../data/dummy-data';
 import DefaultText from '../components/DefaultText';
 import ListItem from '../components/ListItem';
+import {useSelector} from 'react-redux';
 
 const MealDetailsScreen = (props) => {
 
+    const availableMeals = useSelector(state=>state.meals.meals);
+
     // const mealId = props.navigation.getParam('mealId');
     const mealId = props.route.params.mealId;
-    const mealDetails = MEALS.find(item=>item.id == mealId);
+    const mealDetails = availableMeals.find(item=>item.id == mealId);
 
     useEffect(()=>{
         props.navigation.setOptions({

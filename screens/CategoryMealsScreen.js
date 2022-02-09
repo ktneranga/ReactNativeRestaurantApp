@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
-import {Text, View, StyleSheet, Button, Platform, FlatList} from 'react-native';
-import { CATEGORIES,MEALS} from '../data/dummy-data';
+import {useSelector} from 'react-redux' //hook
+import {StyleSheet} from 'react-native';
+import {MEALS} from '../data/dummy-data';
 import Color from '../constants/Color';
 import MealList from '../components/MealList';
 
@@ -9,7 +10,9 @@ const CategoryMealsScreen = (props) => {
     const catId = props.route.params.categoryId;
     // const selectedCategory = CATEGORIES.find((cat)=>cat.id === catId);
 
-    const displayedMeals = MEALS.filter(meal => meal.categoryIds.indexOf(catId)>=0); //if true this meal has catId
+    const availableMeals = useSelector(state=>state.meals.filteredMeals)
+
+    const displayedMeals = availableMeals.filter(meal => meal.categoryIds.indexOf(catId)>=0); //if true this meal has catId
 
 
     useEffect(()=>{
