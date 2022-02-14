@@ -4,6 +4,7 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux' ;
+import {useSelector} from 'react-redux'
 
 // import MealsNavigator from './navigation/MealsNavigator';
 import MealsFavTabNavigator from './navigation/MealsNavigator';

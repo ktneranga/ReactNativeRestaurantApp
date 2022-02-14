@@ -1,6 +1,5 @@
 import React,{useEffect} from 'react';
 import {Text, View, StyleSheet, Button, ScrollView, Image, StatusBar} from 'react-native';
-import {MEALS} from '../data/dummy-data';
 import DefaultText from '../components/DefaultText';
 import ListItem from '../components/ListItem';
 import {useSelector, useDispatch} from 'react-redux';
