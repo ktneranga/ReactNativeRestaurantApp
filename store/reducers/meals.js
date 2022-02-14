@@ -26,7 +26,7 @@ const mealsReducer = (state = initialState, action) => {
         case SET_FILTERS:
           const appliedFilters = action.filters;
           const filteredMeals = state.meals.filter(meal => {
-            if
+            
           });
 
         default:

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet, Switch,Platform} from 'react-native';
 import Color from '../constants/Color';
-
-
+import {useDispatch} from 'react-redux'
+import setFilters from '../store/actions/meals';
 
 const FilterScreen = (props) => {
 
